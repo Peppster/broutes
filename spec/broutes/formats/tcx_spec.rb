@@ -99,6 +99,9 @@ describe Formats::Tcx do
     it "sets the minimum elevation" do
       @route.minimum_elevation.should eq(0)
     end
+    it "sets the activity type" do
+      @route.type.should eq("Biking")
+    end
     it "can create hash" do
       @route.to_hash
     end
@@ -164,6 +167,9 @@ describe Formats::Tcx do
     it "sets the total descent" do
       @route.total_descent.should eq(2.8841553000000033)
     end
+    it "sets the activity type" do
+      @route.type.should eq("Biking")
+    end
     it "can create hash" do
       @route.to_hash
     end
@@ -192,6 +198,9 @@ describe Formats::Tcx do
     end
     it "sets the total descent" do
       @route.total_descent.should eq(0)
+    end
+    it "sets the activity type" do
+      @route.type.should eq("Biking")
     end
     it "can create hash" do
       @route.to_hash

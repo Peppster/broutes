@@ -62,6 +62,11 @@ module Broutes::Formats
       unless route.started_at
         route.started_at = DateTime.parse(doc.css('Activities > Activity > Lap').first['StartTime']).to_time
       end
+
+      unless route.type
+        type_node = doc.css('Activities > Activity')
+        route.type = type_node.first['Sport'] unless type_node.empty?
+      end
     end
 
     def point_location(node)

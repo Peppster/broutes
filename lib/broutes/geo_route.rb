@@ -1,8 +1,8 @@
 module Broutes
   class GeoRoute
 
-    attr_reader :start_point, :end_point, :started_at, :ended_at, :total_time
-    attr_writer :total_distance, :started_at
+    attr_reader :start_point, :end_point, :started_at, :ended_at, :total_time, :type
+    attr_writer :total_distance, :started_at, :type
     attr_accessor :total_time
 
     def points
@@ -41,6 +41,7 @@ module Broutes
       h['start_point'] = start_point.to_hash if start_point
       h['end_point'] = end_point.to_hash if end_point
       h['started_at'] = @started_at if @started_at
+      h['type'] = @type if @type
       h
     end
 
