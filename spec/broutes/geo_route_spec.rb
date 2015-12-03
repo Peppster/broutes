@@ -411,6 +411,54 @@ describe GeoRoute do
     end
   end
 
+  describe '#average_cadence' do
+    before(:each) do
+      @route = GeoRoute.new
+    end
+    context 'when route points have cadence' do
+      before(:each) do
+        @route.add_point(lat: random_lat, lon: random_lon, cadence: 74)
+        @route.add_point(lat: random_lat, lon: random_lon, cadence: 80)
+      end
+      it 'should return the average cadence' do
+        @route.average_cadence.should eq(77)
+      end
+    end
+    context 'when route points do not have cadence' do
+      before(:each) do
+        @route.add_point(lat: random_lat, lon: random_lon)
+        @route.add_point(lat: random_lat, lon: random_lon)
+      end
+      it 'should return 0' do
+        @route.average_cadence.should eq(0)
+      end
+    end
+  end
+
+  describe '#maximum_cadence' do
+    before(:each) do
+      @route = GeoRoute.new
+    end
+    context 'when route points have cadence' do
+      before(:each) do
+        @route.add_point(lat: random_lat, lon: random_lon, cadence: 74)
+        @route.add_point(lat: random_lat, lon: random_lon, cadence: 80)
+      end
+      it 'should return the maximum cadence' do
+        @route.maximum_cadence.should eq(80)
+      end
+    end
+    context 'when route points do not have cadence' do
+      before(:each) do
+        @route.add_point(lat: random_lat, lon: random_lon)
+        @route.add_point(lat: random_lat, lon: random_lon)
+      end
+      it 'should return 0' do
+        @route.maximum_cadence.should eq(0)
+      end
+    end
+  end
+
   describe ".from_hash" do
     let(:started_at) { Time.now }
     let(:points) {[

@@ -38,7 +38,9 @@ module Broutes::Formats
           average_speed: lap_avg_speed(node),
           maximum_speed: lap_maximum_speed(node),
           average_heart_rate: lap_average_heart_rate(node),
-          maximum_heart_rate: lap_maximum_heart_rate(node)
+          maximum_heart_rate: lap_maximum_heart_rate(node),
+          average_cadence: lap_average_cadence(node),
+          maximum_cadence: lap_maximum_cadence(node)
         }
 
         route.add_lap(data)
@@ -100,7 +102,7 @@ module Broutes::Formats
     end
 
     def point_cadence(node)
-      if cadence_node = node.at_css('Cadence')
+      if cadence_node = node.at_xpath('.//tpx:RunCadence', 'tpx' => 'http://www.garmin.com/xmlschemas/ActivityExtension/v2') || node.at_css('Cadence')
         cadence_node.inner_text.to_i
       end
     end
@@ -160,6 +162,18 @@ module Broutes::Formats
     def lap_avg_speed(node)
       if avg_speed_node = node.at_xpath('.//lx:AvgSpeed', 'lx' => 'http://www.garmin.com/xmlschemas/ActivityExtension/v2')
         avg_speed_node.inner_text.to_f
+      end
+    end
+
+    def lap_average_cadence(node)
+      if average_cadence_node = node.at_xpath('.//lx:AvgRunCadence', 'lx' => 'http://www.garmin.com/xmlschemas/ActivityExtension/v2')
+        average_cadence_node.inner_text.to_i
+      end
+    end
+
+    def lap_maximum_cadence(node)
+      if maximum_cadence_node = node.at_xpath('.//lx:MaxRunCadence', 'lx' => 'http://www.garmin.com/xmlschemas/ActivityExtension/v2')
+        maximum_cadence_node.inner_text.to_i
       end
     end
   end

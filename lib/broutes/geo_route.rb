@@ -231,6 +231,30 @@ module Broutes
       laps.map { |l| l.calories }.inject { |sum, l| sum + l } || 0
     end
 
+    # Public: Get average cadence for whole GeoRoute.
+    #
+    # Examples
+    #   @route.average_cadence
+    #   # => 164
+    #
+    # Returns Integer average, or 0 if no cadence on points.
+    def average_cadence
+      points = @_points
+      points.map { |p| p.cadence || 0 }.inject { |sum, p| sum + p } / points.count
+    end
+
+    # Public: Get maximum cadence for whole GeoRoute.
+    #
+    # Examples
+    #   @route.maximum_cadence
+    #   # => 174
+    #
+    # Returns Integer maximum, or 0 if no cadence on points.
+    def maximum_cadence
+      points = @_points
+      points.map { |p| p.cadence }.compact.max || 0
+    end
+
     private
 
     def get_points

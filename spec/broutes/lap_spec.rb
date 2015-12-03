@@ -11,6 +11,8 @@ describe Lap do
       average_speed: random_integer,
       maximum_speed: random_integer,
       average_heart_rate: random_integer,
+      average_cadence: random_integer,
+      maximum_cadence: random_integer,
       max: random_integer
     )
   end
@@ -41,6 +43,12 @@ describe Lap do
     end
     it "contains maximum_heart_rate" do
       subject['maximum_heart_rate'].should eq(@lap.maximum_heart_rate)
+    end
+    it "contains average_cadence" do
+      subject['average_cadence'].should eq(@lap.average_cadence)
+    end
+    it "contains maximum_cadence" do
+      subject['maximum_cadence'].should eq(@lap.maximum_cadence)
     end
   end
 
